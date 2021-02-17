@@ -1,0 +1,26 @@
+<div *ngIf="hero">
+  <h2>{{hero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{id}}</div>
+  <div>
+    <label>name:
+      <input #name [(ngModel)]="hero.name" placeholder="name"/>
+    </label>
+  </div>
+  <div>
+    <label>Rating:
+      <input #rating [(ngModel)]="hero.rating" placeholder="rating"/>
+    </label>
+    <div *ngIf="rating.value > 10"  class="alert alert-danger">
+      <strong>Danger!</strong> Rating should be less than 11
+    </div>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="submitedit(id,name.value,rating.value)">save</button>
+</div>
+
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->

@@ -1,0 +1,92 @@
+<h2>My Heroes</h2>
+
+<div>
+  <label>Hero name:
+    <input #heroName />
+    
+  </label>
+  &nbsp;
+  <label>
+    Hero Rating:
+    <input #herorating>
+  </label>
+  <div *ngIf="herorating.value > 10 " class="alert alert-danger">
+    <strong>Danger!</strong> Rating should be less than 11
+  </div>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value,herorating.value); heroName.value=''">
+    add
+  </button>
+</div>
+<br>
+<!-- <ul class="heroes">
+  <li *ngFor="let hero of heroes">
+    <a routerLink="/detail/{{hero.id}}">
+      {{hero.name}}
+      {{hero.rating}}
+    </a>
+    <button class="delete" title="delete hero"
+      (click)="delete(hero)">x</button>
+  </li>
+</ul> -->
+
+<table style="border: 1px solid black;">
+  <tr>
+    <th>Hero Name</th>
+    <th>Rating</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <tr    *ngFor="let hero of heroes">
+    <td (click)="gotodetail(hero)">{{hero.name}}</td>
+   
+    <td (click)="gotodetail(hero)">{{hero.rating}}</td>
+
+    <td><button class="delete" title="edit hero" data-toggle="modal" data-target="#exampleModal"
+      (click)="edit(hero)"><span class="material-icons">
+        create
+        </span></button></td>
+
+    <td><button class="delete" title="delete hero"
+      (click)="delete(hero)"><span class="material-icons">
+        clear
+        </span></button></td>
+  </tr>
+  
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div *ngIf="editeddata" class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Hero</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="formGroupExampleInput">Name</label>
+          <input type="text" #name  [value]="editeddata.name" class="form-control" id="formGroupExampleInput" >
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Rating</label>
+          <input  #rating [value]="editeddata.rating" type="text" class="form-control" id="formGroupExampleInput2">
+        </div>
+        <div *ngIf="rating.value > 10"  class="alert alert-danger">
+          <strong>Danger!</strong> Rating should be less than 11
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="submitedit(editeddata._id,name.value,rating.value)" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
